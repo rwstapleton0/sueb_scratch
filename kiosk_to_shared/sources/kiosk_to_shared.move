@@ -34,9 +34,7 @@ module kiosk_to_shared::kiosk_to_shared {
         option::fill(&mut safe.store, item);
     }
 
-    public fun create_item(
-        ctx: &mut TxContext
-    ): MyItem {
+    public fun create_item(ctx: &mut TxContext): MyItem {
         MyItem {
             id: object::new(ctx),
             gene: 62
