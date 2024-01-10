@@ -10,6 +10,13 @@ module generic_101::generic_101 {
         gene: u64,
     }
 
+    fun init<T: drop>(ctx: &mut TxContext) {
+        let box = Box<T> {
+            value: option::none()
+        };
+
+    }
+
     public fun create_item(): MyItem {
         MyItem {
             gene: 5
@@ -40,10 +47,11 @@ module generic_101::generic_101 {
     #[test_only] const ADMIN: address = @0xAD;
     #[test_only] use sui::test_scenario as ts;
     #[test]
-    public fun test_create_box() {
+    public fun test_create_box<T: drop>() {
         let ts = ts::begin(@0x0);
         {
             ts::next_tx(&mut ts, ADMIN);
+            init<T>(ts::ctx(&mut ts));
             let numBox = create_box<u64>(4);
 
             let item = create_item();

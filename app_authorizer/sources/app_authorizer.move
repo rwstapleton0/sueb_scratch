@@ -54,7 +54,8 @@ module app_authorizer::floobod_builder {
         app_authorizer::mint<T>(app_cap, ctx)
     }
 
-    // I dont think this way we can differ between <T>??
+    // I dont think this way we can differ between <T>?? think about it I dont think,
+    // the suifrens example is able to block by type. test MORE!!!
     public fun authorizer_me<T>(admin_cap: &AdminCap, app: &mut FloobodBuilder, ctx: &mut TxContext) {
         let cap = app_authorizer::authorizer_app<T>(admin_cap, ctx);
         option::fill(&mut app.app_cap, cap);
